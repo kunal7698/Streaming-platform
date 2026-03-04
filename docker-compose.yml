@@ -12,7 +12,20 @@ services:
       MINIO_ROOT_PASSWORD: password123
     command: server /data --console-address ":9001"
     volumes:
-      - minio-data:/data
+      - minio_data:/data
+  
+  postgres:
+    image: postgres:16
+    container_name: streaming-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: streaming_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  minio-data:
+  minio_data:
+  postgres_data:
